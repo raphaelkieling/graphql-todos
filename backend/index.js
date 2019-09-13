@@ -63,8 +63,8 @@ const userLoader = new Dataloader(async keys => {
 
 const resolvers = {
   Query: {
-    posts: async () => await axios.get(`${API}/posts`).then(a => a.data),
-    todos: async () => await axios.get(`${API}/todos`).then(a => a.data)
+    posts: async () => axios.get(`${API}/posts`).then(({ data }) => data),
+    todos: async () => axios.get(`${API}/todos`).then(({ data }) => data)
   },
   Todo: {
     user: async ({ userId }, args, context, info) => userLoader.load(userId)
